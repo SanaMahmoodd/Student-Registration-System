@@ -12,8 +12,8 @@ function WelcomePage() {
             Easily register student information, validate data, and preview the submitted details in a clean and modern interface.
           </p>
 
-          <Link to="/register" className="main-btn">
-            Go to Registration
+          <Link to="/dashboard" className="main-btn">
+            Go to Dashboard
           </Link>
         </div>
 
