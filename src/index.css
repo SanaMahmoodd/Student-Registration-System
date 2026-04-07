@@ -101,7 +101,6 @@ input {
   z-index: 2;
 }
 
-/* Welcome Page */
 .welcome-card {
   width: 100%;
   max-width: 1150px;
@@ -168,7 +167,6 @@ input {
   object-fit: contain;
 }
 
-/* Navbar */
 .navbar {
   width: 100%;
   max-width: 1300px;
@@ -202,7 +200,6 @@ input {
   opacity: 0.8;
 }
 
-/* Top Back Link */
 .top-bar {
   width: 100%;
   max-width: 1300px;
@@ -220,7 +217,6 @@ input {
   font-weight: 500;
 }
 
-/* Dashboard */
 .dashboard-wrapper {
   width: 100%;
   max-width: 1300px;
@@ -253,7 +249,6 @@ input {
   align-items: start;
 }
 
-/* Form */
 .form-card,
 .list-card,
 .preview-card {
@@ -322,7 +317,6 @@ input {
   margin-top: 10px;
 }
 
-/* Student List */
 .list-card {
   width: 100%;
   min-height: 100%;
@@ -378,14 +372,11 @@ input {
   font-size: 15px;
 }
 
-/* Preview old if needed */
 .preview-card p {
   margin-top: 14px;
   line-height: 1.7;
   color: #f3fff6;
 }
-
-/* Modal */
 
 .modal-content {
   width: 100%;
@@ -447,7 +438,6 @@ input {
   color: #f3fff6;
 }
 
-/* Old register classes if still used anywhere */
 .register-layout {
   display: flex;
   flex-direction: column;
@@ -467,7 +457,89 @@ input {
   flex-wrap: wrap;
 }
 
-/* Responsive */
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.filters-card,
+.table-card {
+  border-radius: 24px;
+  padding: 28px;
+}
+
+.filters-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.input-group select {
+  width: 100%;
+  padding: 15px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  outline: none;
+  font-size: 15px;
+}
+
+.input-group select option {
+  color: #000;
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.students-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+.students-table th,
+.students-table td {
+  text-align: left;
+  padding: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.students-table th {
+  color: var(--light);
+  font-weight: 600;
+}
+
+.students-table td {
+  color: #f3fff6;
+}
+
+.delete-btn {
+  background: rgba(255, 120, 120, 0.15);
+  color: #ffd4d4;
+  border: 1px solid rgba(255, 150, 150, 0.22);
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.delete-btn:hover {
+  background: rgba(255, 120, 120, 0.25);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+  .filters-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 900px) {
   .welcome-card,
   .dashboard-grid {

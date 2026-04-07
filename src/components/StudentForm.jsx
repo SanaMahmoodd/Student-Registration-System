@@ -80,8 +80,9 @@ function StudentForm({ addStudent }) {
 
       <form onSubmit={handleSubmit} className="student-form">
         <div className="input-group">
-          <label>Name</label>
+          <label htmlFor="name">Name</label>
           <input
+            id="name"
             type="text"
             name="name"
             value={formData.name}
@@ -92,8 +93,9 @@ function StudentForm({ addStudent }) {
         </div>
 
         <div className="input-group">
-          <label>Email</label>
+          <label htmlFor="email">Email</label>
           <input
+            id="email"
             type="email"
             name="email"
             value={formData.email}
@@ -104,8 +106,9 @@ function StudentForm({ addStudent }) {
         </div>
 
         <div className="input-group">
-          <label>Course</label>
+          <label htmlFor="course">Course</label>
           <input
+            id="course"
             type="text"
             name="course"
             value={formData.course}
@@ -116,8 +119,9 @@ function StudentForm({ addStudent }) {
         </div>
 
         <div className="input-group">
-          <label>GPA</label>
+          <label htmlFor="gpa">GPA</label>
           <input
+            id="gpa"
             type="number"
             name="gpa"
             value={formData.gpa}
