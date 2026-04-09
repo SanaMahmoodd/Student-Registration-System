@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import StudentForm from "../components/StudentForm";
 import StudentFilters from "../components/StudentFilters";
@@ -55,7 +54,7 @@ function DashboardPage() {
       <div className="dashboard-wrapper">
         <div className="dashboard-header glass">
           <h1>Student Dashboard</h1>
-          <p>Register students, filter them, search by name, and manage records.</p>
+          <p>Register students, search, filter, and manage records.</p>
         </div>
 
         <div className="dashboard-grid">
@@ -72,10 +71,7 @@ function DashboardPage() {
               courses={courses}
             />
 
-            <StudentTable
-              students={filteredStudents}
-              onDelete={deleteStudent}
-            />
+            <StudentTable students={filteredStudents} onDelete={deleteStudent} />
           </div>
         </div>
       </div>

@@ -9,12 +9,19 @@ function WelcomePage() {
           <p className="badge">Student Portal</p>
           <h1>Welcome to Student Registration</h1>
           <p className="subtitle">
-            Easily register student information, validate data, and preview the submitted details in a clean and modern interface.
+            Easily register student information, validate data, and manage
+            students in one clean dashboard.
           </p>
 
-          <Link to="/dashboard" className="main-btn">
-            Go to Dashboard
-          </Link>
+          <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
+            <Link to="/dashboard" className="main-btn">
+              Go to Dashboard
+            </Link>
+
+            <Link to="/students" className="details-btn">
+              View Students
+            </Link>
+          </div>
         </div>
 
         <div className="welcome-image">

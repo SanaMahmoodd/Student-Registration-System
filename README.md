@@ -1,70 +1,133 @@
-# 🎓 Student Registration System
+# Student Dashboard & Student Registration System
 
-A modern and clean **React application** for student registration, built using controlled components, validation, and a glassmorphism UI.
+A modern and clean **React application** built with **Vite** that combines a student registration workflow with a multi-page dashboard experience.
 
----
-
-##  Features
-
--  Student Registration Form (Name, Email, Course, GPA)
--  Form validation (required fields + GPA range)
--  Controlled Components using `useState`
--  One handler for multiple inputs
--  Preview Card after submission
--  Toast notifications (`react-toastify`)
--  Glassmorphism UI design
--  Animated background (glow + particles)
--  Page navigation using React Router
+The project started as a student registration form and was later expanded into a **dashboard-based app** with routing, student management, local storage persistence, filtering, search, and student details pages — while keeping the same **glassmorphism UI design**.
 
 ---
 
-##  Pages
+## Features
 
-###  Welcome Page
+- 📝 Student Registration Form
+  - Name
+  - Email
+  - Course
+  - GPA
+- ✅ Form validation
+  - Required fields
+  - Email format validation
+  - GPA range validation (**0 – 4**)
+- 🎛️ Controlled Components using `useState`
+- 🔁 One handler for multiple inputs
+- 💾 Persistent storage using `localStorage`
+- 📋 Student Dashboard with:
+  - registration form
+  - student table / list
+  - filters
+  - delete action
+  - search by name
+- 👤 Student Details page using dynamic route params
+- 🧭 Multi-page navigation using **React Router**
+- 🌐 Pages included:
+  - Home / Welcome Page
+  - Dashboard Page
+  - Students Page
+  - Student Details Page
+  - About Page
+  - 404 Not Found Page
+- ✨ Active route highlighting in Navbar
+- 🔎 Route params with `/students/:id`
+- ↩️ Programmatic navigation using `useNavigate`
+- 🧪 Unit tests for:
+  - form submission
+  - student table rendering
+- 🎨 Glassmorphism UI
+- 🌌 Animated gradient background with glow and particle effects
+- 🔤 Poppins font
+
+---
+
+## Pages
+
+### Welcome Page
 - Intro section
-- Glass card UI
-- Navigation button
+- Glass card layout
+- Welcome content
+- Navigation buttons to main app sections
 
-###  Registration Page
-- Student form
-- Validation
-- Preview card
-- Back button
+### Dashboard Page
+- Registration form
+- Filters
+- Search input
+- Student table / list
+- Delete action
+- Local storage integration
+
+### Students Page
+- Displays all registered students
+- Links to each student's details page
+
+### Student Details Page
+- Shows full student information
+- Uses route params (`/students/:id`)
+
+### About Page
+- Brief overview of the project
+
+### 404 Page
+- Displayed when the user visits an invalid route
 
 ---
 
-##  Tech Stack
+## Tech Stack
 
-- React (Vite)
-- React Router DOM
-- React Toastify
-- CSS (Glass + Animations)
+- **React**
+- **Vite**
+- **React Router DOM**
+- **Vitest**
+- **React Testing Library**
+- **CSS**
+- **localStorage API**
 
 ---
 
-##  Project Structure
+## Project Structure
 
-```
+```bash
 src/
 │
-├── assets/
+├── assets/                     # Images
 │
 ├── components/
+│   ├── Navbar.jsx
+│   ├── StudentFilters.jsx
 │   ├── StudentForm.jsx
-│   └── StudentPreviewCard.jsx
+│   ├── StudentTable.jsx
+│   └── tests/
+│       ├── StudentForm.test.jsx
+│       └── StudentTable.test.jsx
+│
+├── hooks/
+│   └── useLocalStorage.js
 │
 ├── pages/
-│   ├── WelcomePage.jsx
-│   └── RegisterPage.jsx
+│   ├── AboutPage.jsx
+│   ├── DashboardPage.jsx
+│   ├── HomePage.jsx
+│   ├── NotFoundPage.jsx
+│   ├── StudentDetailsPage.jsx
+│   ├── StudentsPage.jsx
+│   └── WelcomePage.jsx
 │
 ├── App.jsx
 ├── main.jsx
-└── index.css
+├── index.css
+└── setupTests.js
 ```
 
 ---
 
-##  Setup
+## Setup
 
 ```bash
 cd student-form-app
@@ -74,44 +137,48 @@ npm run dev
 
 ---
 
-##  Concepts Used
+## Run Tests
 
+```bash
+npx vitest
+```
+
+or
+
+```bash
+npx vitest run
+```
+
+---
+
+## Concepts Used
+
+- Functional Components
+- React Hooks
 - Controlled Components
-- useState
-- Form validation
-- Dynamic input handling
-- Component structure
-- Conditional rendering
+- Form Validation
+- Dynamic Input Handling
+- Component Composition
+- Client-Side Routing
+- Route Parameters
+- Programmatic Navigation
+- Shared / Lifted State
+- Persistent Browser Storage
+- Unit Testing
 
 ---
 
-##  UI Design
+## Notes
 
-- Glassmorphism effect
-- Gradient background
-- Glow + particle animation
-- Poppins font
-
----
-
-##  Notes
-
-- GPA range: **0 – 4**
-- Email validation included
-- Toast messages for feedback
-
----
-
-##  Future Improvements
-
-- Dropdown for course
-- Add icons
-- More animations
-- Responsive design
-- Backend integration
+- Student data is stored in the browser using **localStorage**
+- Refreshing the page keeps saved students
+- GPA is validated between **0 and 4**
+- Email format is validated
+- Navbar highlights the active route
+- Student details are loaded based on the selected student ID in the URL
 
 ---
 
 ## Author
 
-Sana Saleh <3
+**Sana Saleh** ❤️.
