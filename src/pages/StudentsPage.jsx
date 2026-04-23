@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import { useStudents } from "../context/useStudents";
 
 function StudentsPage() {
-  const { students } = useStudents();
+  const { students, loading, error } = useStudents();
 
   return (
     <div className="page gradient-bg">
@@ -16,7 +16,11 @@ function StudentsPage() {
         </div>
 
         <div className="table-card glass">
-          {students.length === 0 ? (
+          {loading ? (
+            <p className="status-text">Loading students...</p>
+          ) : error ? (
+            <p className="error-text">{error}</p>
+          ) : students.length === 0 ? (
             <p className="empty-text">No students registered yet.</p>
           ) : (
             <div className="table-wrapper">

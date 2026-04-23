@@ -1,6 +1,6 @@
 import { useStudents } from "../context/useStudents";
 
-function StudentTable({ students: filteredStudents }) {
+function StudentTable({ students: filteredStudents, setEditStudent }) {
   const { students, removeStudent } = useStudents();
 
   const displayedStudents = filteredStudents || students;
@@ -32,6 +32,13 @@ function StudentTable({ students: filteredStudents }) {
                   <td>{student.course}</td>
                   <td>{student.gpa}</td>
                   <td>
+                    <button
+                      className="edit-btn"
+                      onClick={() => setEditStudent(student)}
+                    >
+                      Edit
+                    </button>
+
                     <button
                       className="delete-btn"
                       onClick={() => removeStudent(student.id)}

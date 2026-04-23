@@ -1,8 +1,9 @@
+import { useEffect } from "react";
 import { useStudents } from "../context/useStudents";
 import useForm from "../hooks/useForm";
 
-function StudentForm() {
-  const { addStudent } = useStudents();
+function StudentForm({ editStudent, setEditStudent }) {
+  const { addStudent, updateStudent } = useStudents();
 
   const validateForm = (values) => {
     const newErrors = {};
@@ -33,31 +34,60 @@ function StudentForm() {
     return newErrors;
   };
 
-  const { values, errors, handleChange, handleSubmit, resetForm } = useForm(
-    {
-      name: "",
-      email: "",
-      course: "",
-      gpa: "",
-    },
-    validateForm
-  );
+  const { values, errors, handleChange, handleSubmit, resetForm, setValues } =
+    useForm(
+      {
+        name: "",
+        email: "",
+        course: "",
+        gpa: "",
+      },
+      validateForm
+    );
 
-  const onSubmit = () => {
-    const newStudent = {
-      // eslint-disable-next-line react-hooks/purity
-      id: Date.now(),
-      ...values,
-    };
+  useEffect(() => {
+    if (editStudent) {
+      setValues({
+        name: editStudent.name,
+        email: editStudent.email,
+        course: editStudent.course,
+        gpa: editStudent.gpa,
+      });
+    }
+  }, [editStudent, setValues]);
 
-    addStudent(newStudent);
+  const onSubmit = async () => {
+    if (editStudent) {
+      await updateStudent({
+        ...editStudent,
+        ...values,
+      });
+      setEditStudent(null);
+    } else {
+      await addStudent({
+        name: values.name,
+        email: values.email,
+        course: values.course,
+        gpa: values.gpa,
+      });
+    }
+
+    resetForm();
+  };
+
+  const handleCancelEdit = () => {
+    setEditStudent(null);
     resetForm();
   };
 
   return (
     <div className="form-card glass">
-      <h2>Register Student</h2>
-      <p className="subtitle">Fill in the student details below.</p>
+      <h2>{editStudent ? "Update Student" : "Register Student"}</h2>
+      <p className="subtitle">
+        {editStudent
+          ? "Edit the student details below."
+          : "Fill in the student details below."}
+      </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="student-form">
         <div className="input-group">
@@ -114,8 +144,18 @@ function StudentForm() {
         </div>
 
         <button type="submit" className="main-btn full-width">
-          Add Student
+          {editStudent ? "Update Student" : "Add Student"}
         </button>
+
+        {editStudent && (
+          <button
+            type="button"
+            className="cancel-btn full-width"
+            onClick={handleCancelEdit}
+          >
+            Cancel Edit
+          </button>
+        )}
       </form>
     </div>
   );

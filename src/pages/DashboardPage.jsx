@@ -6,7 +6,8 @@ import StudentTable from "../components/StudentTable";
 import { useStudents } from "../context/useStudents";
 
 function DashboardPage() {
-  const { students } = useStudents();
+  const { students, loading, error } = useStudents();
+  const [editStudent, setEditStudent] = useState(null);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [courseFilter, setCourseFilter] = useState("All");
@@ -50,8 +51,14 @@ function DashboardPage() {
           <p>Register students, search, filter, and manage records.</p>
         </div>
 
+        {loading && <p className="status-text">Loading students...</p>}
+        {error && <p className="error-text">{error}</p>}
+
         <div className="dashboard-grid">
-          <StudentForm />
+          <StudentForm
+            editStudent={editStudent}
+            setEditStudent={setEditStudent}
+          />
 
           <div className="right-panel">
             <StudentFilters
@@ -64,7 +71,10 @@ function DashboardPage() {
               courses={courses}
             />
 
-            <StudentTable students={filteredStudents} />
+            <StudentTable
+              students={filteredStudents}
+              setEditStudent={setEditStudent}
+            />
           </div>
         </div>
       </div>

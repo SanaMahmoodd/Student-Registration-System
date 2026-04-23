@@ -5,9 +5,9 @@ import { useStudents } from "../context/useStudents";
 function StudentDetailsPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { students } = useStudents();
+  const { students, loading, error } = useStudents();
 
-  const student = students.find((item) => item.id === Number(id));
+  const student = students.find((item) => String(item.id) === String(id));
 
   return (
     <div className="page gradient-bg">
@@ -15,7 +15,11 @@ function StudentDetailsPage() {
 
       <div className="dashboard-wrapper">
         <div className="page-card glass">
-          {!student ? (
+          {loading ? (
+            <p className="status-text">Loading student details...</p>
+          ) : error ? (
+            <p className="error-text">{error}</p>
+          ) : !student ? (
             <>
               <h1>Student Not Found</h1>
               <p>No student found with this ID.</p>

@@ -1,128 +1,115 @@
-# Student Dashboard & Student Registration System
+# Student Dashboard & Registration System (with API Integration)
 
-A modern and clean **React application** built with **Vite** that combines a student registration workflow with a multi-page dashboard experience.
+A modern and clean **React application** built with **Vite** that evolved from a simple student registration form into a **full-featured dashboard application**.
 
-The project started as a student registration form and was later expanded into a **dashboard-based app** with routing, student management, local storage persistence, filtering, search, and student details pages — while keeping the same **glassmorphism UI design**.
+The project now includes:
+
+* Global state management using **Context API**
+* Custom reusable hooks
+* Full CRUD operations using a **mock backend (JSON Server)**
+* Multi-page navigation with React Router
+* A modern glassmorphism UI design
 
 ---
 
 ## Features
 
-- 📝 Student Registration Form
-  - Name
-  - Email
-  - Course
-  - GPA
-- ✅ Form validation
-  - Required fields
-  - Email format validation
-  - GPA range validation (**0 – 4**)
-- 🎛️ Controlled Components using `useState`
-- 🔁 One handler for multiple inputs
-- 💾 Persistent storage using `localStorage`
-- 📋 Student Dashboard with:
-  - registration form
-  - student table / list
-  - filters
-  - delete action
-  - search by name
-- 👤 Student Details page using dynamic route params
-- 🧭 Multi-page navigation using **React Router**
-- 🌐 Pages included:
-  - Home / Welcome Page
-  - Dashboard Page
-  - Students Page
-  - Student Details Page
-  - About Page
-  - 404 Not Found Page
-- ✨ Active route highlighting in Navbar
-- 🔎 Route params with `/students/:id`
-- ↩️ Programmatic navigation using `useNavigate`
-- 🧪 Unit tests for:
-  - form submission
-  - student table rendering
-- 🎨 Glassmorphism UI
-- 🌌 Animated gradient background with glow and particle effects
-- 🔤 Poppins font
+### Student Management
 
----
+* Add new students
+* Edit existing students
+* Delete students
+* View student details
+* Persistent data via **JSON Server API**
 
-## Pages
+### Full CRUD Operations
 
-### Welcome Page
-- Intro section
-- Glass card layout
-- Welcome content
-- Navigation buttons to main app sections
+* GET → fetch students
+* POST → add student
+* PUT → update student
+* DELETE → remove student
 
-### Dashboard Page
-- Registration form
-- Filters
-- Search input
-- Student table / list
-- Delete action
-- Local storage integration
+### API Integration
 
-### Students Page
-- Displays all registered students
-- Links to each student's details page
+* Mock backend using **JSON Server**
+* Real-time data updates
+* Loading and error handling in UI
 
-### Student Details Page
-- Shows full student information
-- Uses route params (`/students/:id`)
+### State Management
 
-### About Page
-- Brief overview of the project
+* Global state using **Context API**
+* Shared student data across components
 
-### 404 Page
-- Displayed when the user visits an invalid route
+### Custom Hooks
+
+* `useForm` → form state + validation
+* `useFetch` → API data fetching
+* `useLocalStorage` (used in earlier version)
+
+### Form Features
+
+* Controlled inputs
+* Single handler for multiple inputs
+* Validation:
+
+  * Required fields
+  * Email format
+  * GPA range (0–4)
+
+### Dashboard Features
+
+* Search by name
+* Filter by course
+* Filter by GPA
+* Dynamic student table
+
+### Routing
+
+* Multi-page navigation using React Router
+* Dynamic routes (`/students/:id`)
+* 404 Not Found page
+* Programmatic navigation
+
+### UI
+
+* Glassmorphism design
+* Gradient animated background
+* Responsive layout
+* Poppins font
 
 ---
 
 ## Tech Stack
 
-- **React**
-- **Vite**
-- **React Router DOM**
-- **Vitest**
-- **React Testing Library**
-- **CSS**
-- **localStorage API**
+* React
+* Vite
+* React Router DOM
+* Context API
+* Custom Hooks
+* JSON Server
+* Fetch API
+* Vitest
+* React Testing Library
+* CSS (Glass UI + animations)
 
 ---
 
-## Project Structure
+## API (JSON Server)
+
+### Endpoint
+
+http://localhost:3001/students
+
+### Run API server
 
 ```bash
-src/
-│
-├── assets/                     # Images
-│
-├── components/
-│   ├── Navbar.jsx
-│   ├── StudentFilters.jsx
-│   ├── StudentForm.jsx
-│   ├── StudentTable.jsx
-│   └── tests/
-│       ├── StudentForm.test.jsx
-│       └── StudentTable.test.jsx
-│
-├── hooks/
-│   └── useLocalStorage.js
-│
-├── pages/
-│   ├── AboutPage.jsx
-│   ├── DashboardPage.jsx
-│   ├── HomePage.jsx
-│   ├── NotFoundPage.jsx
-│   ├── StudentDetailsPage.jsx
-│   ├── StudentsPage.jsx
-│   └── WelcomePage.jsx
-│
-├── App.jsx
-├── main.jsx
-├── index.css
-└── setupTests.js
+npm run server
+```
+
+### Run frontend
+
+```bash
+npm run dev
 ```
 
 ---
@@ -132,53 +119,39 @@ src/
 ```bash
 cd student-form-app
 npm install
+npm run server
 npm run dev
 ```
 
 ---
 
-## Run Tests
+## Notes
 
-```bash
-npx vitest
-```
-
-or
-
-```bash
-npx vitest run
-```
+* Data is managed through a **mock backend (JSON Server)**
+* All CRUD operations are handled via API calls
+* Loading and error states are displayed in the UI
+* Student IDs are generated by the server
+* Demonstrates full frontend-backend interaction
 
 ---
 
 ## Concepts Used
 
-- Functional Components
-- React Hooks
-- Controlled Components
-- Form Validation
-- Dynamic Input Handling
-- Component Composition
-- Client-Side Routing
-- Route Parameters
-- Programmatic Navigation
-- Shared / Lifted State
-- Persistent Browser Storage
-- Unit Testing
-
----
-
-## Notes
-
-- Student data is stored in the browser using **localStorage**
-- Refreshing the page keeps saved students
-- GPA is validated between **0 and 4**
-- Email format is validated
-- Navbar highlights the active route
-- Student details are loaded based on the selected student ID in the URL
+* React Functional Components
+* Context API (Global State)
+* Custom Hooks
+* Controlled Components
+* Form Validation
+* REST API Integration
+* CRUD Operations
+* Async/Await & Fetch API
+* Client-Side Routing
+* Route Parameters
+* Programmatic Navigation
+* Unit Testing
 
 ---
 
 ## Author
 
-**Sana Saleh** ❤️.
+**Sana Saleh** ❤️

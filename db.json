@@ -1,0 +1,19 @@
+{
+  "students": [
+    {
+      "id": "1",
+      "name": "Sana Saleh",
+      "email": "sanasaleh699@gmail.com",
+      "course": "React",
+      "gpa": "3.8"
+    },
+    {
+      "id": "2",
+      "name": "Ahmad Ali",
+      "email": "ahmad@example.com",
+      "course": "JavaScript",
+      "gpa": "3.4"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

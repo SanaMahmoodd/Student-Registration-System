@@ -632,6 +632,42 @@ input {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.22);
 }
 
+.status-text {
+  margin: 16px 0;
+  font-size: 16px;
+  color: #daf1de;
+}
+
+.edit-btn {
+  margin-right: 10px;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: rgba(142, 182, 155, 0.25);
+  color: #daf1de;
+  transition: 0.3s ease;
+}
+
+.edit-btn:hover {
+  background: rgba(142, 182, 155, 0.4);
+}
+
+.cancel-btn {
+  margin-top: 10px;
+  padding: 12px 14px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.12);
+  color: #daf1de;
+  transition: 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
 @media (max-width: 768px) {
   .page {
     padding: 20px;

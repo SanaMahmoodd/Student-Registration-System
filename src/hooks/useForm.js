@@ -13,14 +13,14 @@ function useForm(initialValues, validate) {
     }));
   };
 
-  const handleSubmit = (onSubmit) => (e) => {
+  const handleSubmit = (onSubmit) => async (e) => {
     e.preventDefault();
 
     const validationErrors = validate(values);
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      onSubmit();
+      await onSubmit();
     }
   };
 
@@ -36,6 +36,7 @@ function useForm(initialValues, validate) {
     handleSubmit,
     resetForm,
     setErrors,
+    setValues,
   };
 }
 
