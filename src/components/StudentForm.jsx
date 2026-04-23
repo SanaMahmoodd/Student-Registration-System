@@ -1,48 +1,30 @@
-import { useState } from "react";
 import { useStudents } from "../context/useStudents";
+import useForm from "../hooks/useForm";
 
 function StudentForm() {
   const { addStudent } = useStudents();
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    course: "",
-    gpa: "",
-  });
-
-  const [errors, setErrors] = useState({});
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const validateForm = () => {
+  const validateForm = (values) => {
     const newErrors = {};
 
-    if (!formData.name.trim()) {
+    if (!values.name.trim()) {
       newErrors.name = "Name is required";
     }
 
-    if (!formData.email.trim()) {
+    if (!values.email.trim()) {
       newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    } else if (!/\S+@\S+\.\S+/.test(values.email)) {
       newErrors.email = "Please enter a valid email";
     }
 
-    if (!formData.course.trim()) {
+    if (!values.course.trim()) {
       newErrors.course = "Course is required";
     }
 
-    if (!formData.gpa.trim()) {
+    if (!values.gpa.trim()) {
       newErrors.gpa = "GPA is required";
     } else {
-      const gpaValue = parseFloat(formData.gpa);
+      const gpaValue = parseFloat(values.gpa);
       if (isNaN(gpaValue) || gpaValue < 0 || gpaValue > 4) {
         newErrors.gpa = "GPA must be between 0 and 4";
       }
@@ -51,29 +33,25 @@ function StudentForm() {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const validationErrors = validateForm();
-    setErrors(validationErrors);
-
-    if (Object.keys(validationErrors).length > 0) return;
-
-    const newStudent = {
-      id: Date.now(),
-      ...formData,
-    };
-
-    addStudent(newStudent);
-
-    setFormData({
+  const { values, errors, handleChange, handleSubmit, resetForm } = useForm(
+    {
       name: "",
       email: "",
       course: "",
       gpa: "",
-    });
+    },
+    validateForm
+  );
 
-    setErrors({});
+  const onSubmit = () => {
+    const newStudent = {
+      // eslint-disable-next-line react-hooks/purity
+      id: Date.now(),
+      ...values,
+    };
+
+    addStudent(newStudent);
+    resetForm();
   };
 
   return (
@@ -81,14 +59,14 @@ function StudentForm() {
       <h2>Register Student</h2>
       <p className="subtitle">Fill in the student details below.</p>
 
-      <form onSubmit={handleSubmit} className="student-form">
+      <form onSubmit={handleSubmit(onSubmit)} className="student-form">
         <div className="input-group">
           <label htmlFor="name">Name</label>
           <input
             id="name"
             type="text"
             name="name"
-            value={formData.name}
+            value={values.name}
             onChange={handleChange}
             placeholder="Enter student name"
           />
@@ -101,7 +79,7 @@ function StudentForm() {
             id="email"
             type="email"
             name="email"
-            value={formData.email}
+            value={values.email}
             onChange={handleChange}
             placeholder="Enter student email"
           />
@@ -114,7 +92,7 @@ function StudentForm() {
             id="course"
             type="text"
             name="course"
-            value={formData.course}
+            value={values.course}
             onChange={handleChange}
             placeholder="Enter course name"
           />
@@ -127,7 +105,7 @@ function StudentForm() {
             id="gpa"
             type="number"
             name="gpa"
-            value={formData.gpa}
+            value={values.gpa}
             onChange={handleChange}
             placeholder="Enter GPA"
             step="0.1"
