@@ -3,21 +3,14 @@ import Navbar from "../components/Navbar";
 import StudentForm from "../components/StudentForm";
 import StudentFilters from "../components/StudentFilters";
 import StudentTable from "../components/StudentTable";
-import useLocalStorage from "../hooks/useLocalStorage";
+import { useStudents } from "../context/useStudents";
 
 function DashboardPage() {
-  const [students, setStudents] = useLocalStorage("students", []);
+  const { students } = useStudents();
+
   const [searchTerm, setSearchTerm] = useState("");
   const [courseFilter, setCourseFilter] = useState("All");
   const [gpaFilter, setGpaFilter] = useState("All");
-
-  const addStudent = (newStudent) => {
-    setStudents((prev) => [...prev, newStudent]);
-  };
-
-  const deleteStudent = (id) => {
-    setStudents((prev) => prev.filter((student) => student.id !== id));
-  };
 
   const courses = useMemo(() => {
     const uniqueCourses = [...new Set(students.map((student) => student.course))];
@@ -58,7 +51,7 @@ function DashboardPage() {
         </div>
 
         <div className="dashboard-grid">
-          <StudentForm addStudent={addStudent} />
+          <StudentForm />
 
           <div className="right-panel">
             <StudentFilters
@@ -71,7 +64,7 @@ function DashboardPage() {
               courses={courses}
             />
 
-            <StudentTable students={filteredStudents} onDelete={deleteStudent} />
+            <StudentTable students={filteredStudents} />
           </div>
         </div>
       </div>

@@ -1,9 +1,15 @@
-function StudentTable({ students, onDelete }) {
+import { useStudents } from "../context/useStudents";
+
+function StudentTable({ students: filteredStudents }) {
+  const { students, removeStudent } = useStudents();
+
+  const displayedStudents = filteredStudents || students;
+
   return (
     <div className="table-card glass">
       <h2>Registered Students</h2>
 
-      {students.length === 0 ? (
+      {displayedStudents.length === 0 ? (
         <p className="empty-text">No students found.</p>
       ) : (
         <div className="table-wrapper">
@@ -19,7 +25,7 @@ function StudentTable({ students, onDelete }) {
             </thead>
 
             <tbody>
-              {students.map((student) => (
+              {displayedStudents.map((student) => (
                 <tr key={student.id}>
                   <td>{student.name}</td>
                   <td>{student.email}</td>
@@ -28,7 +34,7 @@ function StudentTable({ students, onDelete }) {
                   <td>
                     <button
                       className="delete-btn"
-                      onClick={() => onDelete(student.id)}
+                      onClick={() => removeStudent(student.id)}
                     >
                       Delete
                     </button>

@@ -1,11 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import useLocalStorage from "../hooks/useLocalStorage";
+import { useStudents } from "../context/useStudents";
 
 function StudentDetailsPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [students] = useLocalStorage("students", []);
+  const { students } = useStudents();
 
   const student = students.find((item) => item.id === Number(id));
 

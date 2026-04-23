@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useStudents } from "../context/useStudents";
 
-function StudentForm({ addStudent }) {
+function StudentForm() {
+  const { addStudent } = useStudents();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",

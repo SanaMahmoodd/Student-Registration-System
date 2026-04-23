@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import useLocalStorage from "../hooks/useLocalStorage";
+import { useStudents } from "../context/useStudents";
 
 function StudentsPage() {
-  const [students] = useLocalStorage("students", []);
+  const { students } = useStudents();
 
   return (
     <div className="page gradient-bg">
