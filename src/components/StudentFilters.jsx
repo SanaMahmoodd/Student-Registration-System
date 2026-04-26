@@ -1,3 +1,5 @@
+import React from "react";
+
 function StudentFilters({
   searchTerm,
   setSearchTerm,
@@ -53,4 +55,4 @@ function StudentFilters({
   );
 }
 
-export default StudentFilters;
+export default React.memo(StudentFilters);

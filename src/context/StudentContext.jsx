@@ -1,4 +1,10 @@
-import { createContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const StudentContext = createContext();
@@ -10,7 +16,7 @@ export function StudentProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const fetchStudents = async () => {
+  const fetchStudents = useCallback(async () => {
     try {
       setLoading(true);
       setError("");
@@ -28,13 +34,13 @@ export function StudentProvider({ children }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchStudents();
-  }, []);
+  }, [fetchStudents]);
 
-  const addStudent = async (newStudent) => {
+  const addStudent = useCallback(async (newStudent) => {
     try {
       setError("");
 
@@ -55,9 +61,9 @@ export function StudentProvider({ children }) {
     } catch (err) {
       setError(err.message);
     }
-  };
+  }, []);
 
-  const removeStudent = async (id) => {
+  const removeStudent = useCallback(async (id) => {
     try {
       setError("");
 
@@ -75,9 +81,9 @@ export function StudentProvider({ children }) {
     } catch (err) {
       setError(err.message);
     }
-  };
+  }, []);
 
-  const updateStudent = async (updatedStudent) => {
+  const updateStudent = useCallback(async (updatedStudent) => {
     try {
       setError("");
 
@@ -105,20 +111,31 @@ export function StudentProvider({ children }) {
     } catch (err) {
       setError(err.message);
     }
-  };
+  }, []);
+
+  const contextValue = useMemo(
+    () => ({
+      students,
+      loading,
+      error,
+      fetchStudents,
+      addStudent,
+      removeStudent,
+      updateStudent,
+    }),
+    [
+      students,
+      loading,
+      error,
+      fetchStudents,
+      addStudent,
+      removeStudent,
+      updateStudent,
+    ]
+  );
 
   return (
-    <StudentContext.Provider
-      value={{
-        students,
-        loading,
-        error,
-        fetchStudents,
-        addStudent,
-        removeStudent,
-        updateStudent,
-      }}
-    >
+    <StudentContext.Provider value={contextValue}>
       {children}
     </StudentContext.Provider>
   );

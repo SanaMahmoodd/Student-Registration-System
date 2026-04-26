@@ -1,3 +1,4 @@
+import React from "react";
 import { useStudents } from "../context/useStudents";
 
 function StudentTable({ students: filteredStudents, setEditStudent }) {
@@ -26,27 +27,12 @@ function StudentTable({ students: filteredStudents, setEditStudent }) {
 
             <tbody>
               {displayedStudents.map((student) => (
-                <tr key={student.id}>
-                  <td>{student.name}</td>
-                  <td>{student.email}</td>
-                  <td>{student.course}</td>
-                  <td>{student.gpa}</td>
-                  <td>
-                    <button
-                      className="edit-btn"
-                      onClick={() => setEditStudent(student)}
-                    >
-                      Edit
-                    </button>
-
-                    <button
-                      className="delete-btn"
-                      onClick={() => removeStudent(student.id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
+                <StudentRow
+                  key={student.id}
+                  student={student}
+                  onEdit={setEditStudent}
+                  onDelete={removeStudent}
+                />
               ))}
             </tbody>
           </table>
@@ -56,4 +42,24 @@ function StudentTable({ students: filteredStudents, setEditStudent }) {
   );
 }
 
-export default StudentTable;
+const StudentRow = React.memo(function StudentRow({ student, onEdit, onDelete }) {
+  return (
+    <tr>
+      <td>{student.name}</td>
+      <td>{student.email}</td>
+      <td>{student.course}</td>
+      <td>{student.gpa}</td>
+      <td>
+        <button className="edit-btn" onClick={() => onEdit(student)}>
+          Edit
+        </button>
+
+        <button className="delete-btn" onClick={() => onDelete(student.id)}>
+          Delete
+        </button>
+      </td>
+    </tr>
+  );
+});
+
+export default React.memo(StudentTable);

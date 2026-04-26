@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import Navbar from "../components/Navbar";
 import StudentForm from "../components/StudentForm";
 import StudentFilters from "../components/StudentFilters";
@@ -13,8 +13,15 @@ function DashboardPage() {
   const [courseFilter, setCourseFilter] = useState("All");
   const [gpaFilter, setGpaFilter] = useState("All");
 
+  const handleEditStudent = useCallback((student) => {
+    setEditStudent(student);
+  }, []);
+
   const courses = useMemo(() => {
-    const uniqueCourses = [...new Set(students.map((student) => student.course))];
+    const uniqueCourses = [
+      ...new Set(students.map((student) => student.course)),
+    ];
+
     return ["All", ...uniqueCourses];
   }, [students]);
 
@@ -73,7 +80,7 @@ function DashboardPage() {
 
             <StudentTable
               students={filteredStudents}
-              setEditStudent={setEditStudent}
+              setEditStudent={handleEditStudent}
             />
           </div>
         </div>
