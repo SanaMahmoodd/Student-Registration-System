@@ -6,7 +6,7 @@ import StudentTable from "../components/StudentTable";
 import { useStudents } from "../context/useStudents";
 
 function DashboardPage() {
-  const { students, loading, error } = useStudents();
+  const { students = [], loading, error, fetchStudents } = useStudents();
   const [editStudent, setEditStudent] = useState(null);
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -19,16 +19,16 @@ function DashboardPage() {
 
   const courses = useMemo(() => {
     const uniqueCourses = [
-      ...new Set(students.map((student) => student.course)),
+      ...new Set(students?.map((student) => student.course)),
     ];
 
     return ["All", ...uniqueCourses];
   }, [students]);
 
   const filteredStudents = useMemo(() => {
-    return students.filter((student) => {
+    return students?.filter((student) => {
       const matchesSearch = student.name
-        .toLowerCase()
+        ?.toLowerCase()
         .includes(searchTerm.toLowerCase());
 
       const matchesCourse =
@@ -48,6 +48,13 @@ function DashboardPage() {
     });
   }, [students, searchTerm, courseFilter, gpaFilter]);
 
+//const shouldCrash = true;
+const shouldCrash = false;
+
+if (shouldCrash) {
+  throw new Error("Test Error");
+}
+
   return (
     <div className="page gradient-bg">
       <Navbar />
@@ -59,31 +66,42 @@ function DashboardPage() {
         </div>
 
         {loading && <p className="status-text">Loading students...</p>}
-        {error && <p className="error-text">{error}</p>}
 
-        <div className="dashboard-grid">
-          <StudentForm
-            editStudent={editStudent}
-            setEditStudent={setEditStudent}
-          />
-
-          <div className="right-panel">
-            <StudentFilters
-              searchTerm={searchTerm}
-              setSearchTerm={setSearchTerm}
-              courseFilter={courseFilter}
-              setCourseFilter={setCourseFilter}
-              gpaFilter={gpaFilter}
-              setGpaFilter={setGpaFilter}
-              courses={courses}
-            />
-
-            <StudentTable
-              students={filteredStudents}
-              setEditStudent={handleEditStudent}
-            />
+        {error && (
+          <div className="error-box glass">
+            <p>⚠️ Failed to load students</p>
+            <p className="error-text">{error}</p>
+            <button className="main-btn" onClick={fetchStudents}>
+              Retry
+            </button>
           </div>
-        </div>
+        )}
+
+        {!loading && !error && (
+          <div className="dashboard-grid">
+            <StudentForm
+              editStudent={editStudent}
+              setEditStudent={setEditStudent}
+            />
+
+            <div className="right-panel">
+              <StudentFilters
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                courseFilter={courseFilter}
+                setCourseFilter={setCourseFilter}
+                gpaFilter={gpaFilter}
+                setGpaFilter={setGpaFilter}
+                courses={courses}
+              />
+
+              <StudentTable
+                students={filteredStudents}
+                setEditStudent={handleEditStudent}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

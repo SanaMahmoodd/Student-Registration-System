@@ -668,6 +668,16 @@ input {
   background: rgba(255, 255, 255, 0.2);
 }
 
+.error-box {
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 18px;
+}
+
+.error-box p {
+  margin-bottom: 10px;
+}
+
 @media (max-width: 768px) {
   .page {
     padding: 20px;
