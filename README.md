@@ -44,7 +44,7 @@ The project now includes:
 
 * `useForm` → form state + validation
 * `useFetch` → API data fetching
-* `useLocalStorage` (used in earlier version)
+* `useLocalStorage` (used in earlier versions)
 
 ### Form Features
 
@@ -77,9 +77,7 @@ The project now includes:
 * Responsive layout
 * Poppins font
 
----
-
-## Performance Optimization
+### Performance Optimization
 
 * Reduced unnecessary component re-renders
 * Used `React.memo` to prevent redundant rendering
@@ -87,9 +85,7 @@ The project now includes:
 * Used `useCallback` to memoize functions passed to child components
 * Improved overall application responsiveness
 
----
-
-## Error Handling & Resilience
+### Error Handling & Resilience
 
 * Implemented **Error Boundary** to catch runtime errors
 * Prevents full application crash on unexpected errors
